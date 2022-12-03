@@ -1,5 +1,6 @@
+import { useNavigation } from "@react-navigation/native"
 import React from "react"
-import { View, Text, StyleSheet } from "react-native"
+import { View, Text, StyleSheet, handleSetShowHome, handleNavHome } from "react-native"
 import { ScrollView } from "react-native-gesture-handler"
 
 
@@ -8,8 +9,10 @@ import ExplanationCard from "../../components/explanation/explanationCard"
 import explanationCard from "../../components/explanation/explanationCard"
 
 export default function AppExplanation() {
-    function handleSetShowHome() {
-        console.log("Button clicked")
+    const navigation = useNavigation()
+
+    function handleNavHome() {
+        navigation.navigate("Home")
     }
 
     return (
@@ -22,7 +25,7 @@ export default function AppExplanation() {
                     <Text style={styles.description}>On next screen you will choose {"\n"}
                         your four habits individually.
                     </Text>
-                    <DefaultButton buttonText={"Continue"} handlePress={handleSetShowHome}
+                    <DefaultButton buttonText={"Continue"} handlePress={handleNavHome}
                         width={250} height={50} />
                 </View>
             </ScrollView>
