@@ -6,9 +6,12 @@ import DefaultButton from "../../components/common/defaultButton";
 import LifeStatus from "../../components/common/lifeStatus";
 
 export default function Start() {
+    const navigation = useNavigation()
+
     const handleNavAppExplanation = () => {
-        console.log("Click test")
+        navigation.navigate("AppExplanation")
     }
+
 
     return (
         <View style={styles.container}>
