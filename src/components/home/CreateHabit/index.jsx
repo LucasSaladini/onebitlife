@@ -9,7 +9,7 @@ export default function CreateHabit({ habitArea, borderColor }) {
     return (
         <TouchableOpacity activeOpacity={0.8} style={[styles.button, {borderColor: borderColor}]}
             onPress={handleCreateHabit}>
-            <Text style={styles.habitTitle}>Add goal {habitArea === "Mind" ? "da" : "do"} {habitArea}</Text>
+            <Text style={styles.habitTitle}>Add {habitArea} goal</Text>
         </TouchableOpacity>
     )
 }
