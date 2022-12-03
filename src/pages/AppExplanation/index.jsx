@@ -4,6 +4,8 @@ import { ScrollView } from "react-native-gesture-handler"
 
 
 import DefaultButton from "../../components/common/defaultButton"
+import ExplanationCard from "../../components/explanation/explanationCard"
+import explanationCard from "../../components/explanation/explanationCard"
 
 export default function AppExplanation() {
     function handleSetShowHome() {
@@ -11,10 +13,11 @@ export default function AppExplanation() {
     }
 
     return (
-        <View styles={styles.container}>
+        <View style={styles.container}>
             <ScrollView>
                 <View style={{ alignItems: "center" }}>
                     <Text style={styles.title}>First, let me {"\n"} explain something...</Text>
+                    <ExplanationCard />
                     <Text style={styles.descriptionCTA}>Ready to level up on life?</Text>
                     <Text style={styles.description}>On next screen you will choose {"\n"}
                         your four habits individually.
@@ -30,7 +33,7 @@ export default function AppExplanation() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#rgba (21, 21, 21, 0.98",
+        backgroundColor: "rgba(21, 21, 21, 0.98)"
     },
 
     title: {
