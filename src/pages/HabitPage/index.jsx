@@ -1,12 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect, useRef, setHabitInput } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Alert } from "react-native"
+
 import TimeDatePicker from "../../components/HabitPage/DateTimePicker";
 import Notification from "../../components/HabitPage/Notification";
 import SelectFrequency from "../../components/HabitPage/SelectFrequency";
 import SelectHabit from "../../components/HabitPage/SelectHabit";
 import UpdateExcludeButtons from "../../components/HabitPage/UpdateExcludeButtons";
 import DefaultButton from "../../components/common/defaultButton";
+import habitService from '../../services/habitService'
 
 export default function HabitPage({ route }) {
     const navigation = useNavigation()
@@ -17,6 +19,9 @@ export default function HabitPage({ route }) {
     const [timeNotification, setTimeNotification] = useState()
 
     const { create, habit } = route.params
+
+    const habitCreated = new Date()
+    const formatDate = `${habitCreated.getFullYear()}-${habitCreated.getMonth()}-${habitCreated.getDate()}`
 
     function handleCreateHabit() {
         if (habitInput === undefined || frequencyInput === undefined) {
@@ -34,8 +39,21 @@ export default function HabitPage({ route }) {
         ) {
             Alert.alert("You need to select a frequency and notification time")
         } else {
-            navigation.navigate("Home", {
-                createHabit: `Created in ${habit?.habitArea}`
+            habitService.createHabit({
+                habitArea: habit?.habitArea,
+                habitName: habitInput,
+                habitFrequency: frequencyInput,
+                habitHasNotification: notificationToggle,
+                habitNotificationFrequency: dayNotification,
+                habitNotificationTime: timeNotification,
+                lastCheck: formatDate,
+                daysWithoutChecks: 0,
+                habitIsChecked: 0,
+                progressBar: 1
+            }).then(() => {
+                navigation.navigate("Home", {
+                    createdHabit: `Created in ${habit?.habitArea}`
+                })
             })
         }
     }
