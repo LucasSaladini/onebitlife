@@ -51,4 +51,4 @@ const findByArea = (habitArea) => {
     })
 }
 
-export default { createHabit }
+export default { createHabit, findByArea }
