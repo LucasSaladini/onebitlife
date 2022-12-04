@@ -3,12 +3,14 @@ import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useState, useEffect } from "react";
+
 import LifeStatus from "../../components/common/lifeStatus";
 import StatusBar from "../../components/home/StatusBar";
 import CreateHabit from "../../components/home/CreateHabit";
 import EditHabit from "../../components/home/EditHabit";
+import changeNavigationService from "../../services/changeNavigationService";
 
-export default function Home() {
+export default function Home({ route }) {
     const navigation = useNavigation()
 
     const [mindHabit, setMindHabit] = useState()
@@ -16,15 +18,29 @@ export default function Home() {
     const [bodyHabit, setBodyHabit] = useState()
     const [moodHabit, setMoodHabit] = useState()
 
+    const [robotDaysLife, setRobotDaysLife] = useState()
+    const today = new Date()
+
     function handleNavExplanation() {
         navigation.navigate("AppExplanation")
     }
+
+    useEffect(() => {
+        changeNavigationService.checkShowHome(1)
+        .then((showHome) => {
+          const formDate = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+          const checkDays = new Date(formDate) - new Date(showHome.appStartData) + 1;
+      
+            setRobotDaysLife(checkDays.toString().padStart(2, "0"));
+        })
+          .catch((err) => console.log(err));
+      }, [route.params]);
 
     return (
         <View style={styles.container}>
             <ScrollView>
                 <View style={{ alignItems: "center" }}>
-                    <Text style={styles.dailyChecks}>❤️ 20 dias - ✔️ 80 checks</Text>
+                    <Text style={styles.dailyChecks}>❤️ {robotDaysLife} {robotDaysLife === "01" ? "day" : "days"} - ✔️ 80 Checks</Text>
                     <LifeStatus />
                     <StatusBar />
                     {mindHabit ? (
