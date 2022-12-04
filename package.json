@@ -22,7 +22,8 @@
     "react-native-dropdown-select-list": "^2.0.2",
     "react-native-paper": "^5.0.0-rc.9",
     "expo-file-system": "~15.1.1",
-    "expo-asset": "~8.6.2"
+    "expo-asset": "~8.6.2",
+    "expo-sqlite": "~11.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
