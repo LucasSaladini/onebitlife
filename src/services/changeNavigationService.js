@@ -11,7 +11,7 @@ db.transaction((tx) => {
 })
 
 const setShowHome = (obj) => {
-    return new Promisse((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql(
                 "INSERT INTO change_navigation (showHome, appStartData) values (?, ?);",
