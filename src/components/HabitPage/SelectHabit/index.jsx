@@ -28,7 +28,7 @@ export default function SelectHabit({ habit, habitInput }) {
     
     return (
         <>
-            <SelectList selected={setSelected} data={data} search={false}
+            <SelectList setSelected={setSelected} data={data} search={false}
                 onSelect={() => { habitInput(selected) }} placeholder={selected}
                 boxStyles={styles.boxStyle} inputStyles={styles.inputStyle}
                 dropdownStyles={styles.dropdownStyle}
